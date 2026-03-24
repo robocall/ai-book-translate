@@ -1,0 +1,17 @@
+[
+  {
+    "canto": 1,
+    "model": "gemma3:4b",
+    "output_file": "inferno_genz_output/canto_01.md"
+  },
+  {
+    "canto": 2,
+    "model": "gemma3:4b",
+    "output_file": "inferno_genz_output/canto_02.md"
+  },
+  {
+    "canto": 3,
+    "model": "gemma3:4b",
+    "output_file": "inferno_genz_output/canto_03.md"
+  }
+]
