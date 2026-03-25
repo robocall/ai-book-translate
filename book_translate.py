@@ -30,6 +30,7 @@ import ollama
 
 # --- per-book knobs ---
 BOOK_TITLE = "Old Dragonbeard (虬髯客傳)"
+# Wording in prompts only (“Chunk 3”, “earlier chunks…”); filenames use --chunk-prefix.
 SECTION_LABEL = "Chunk"
 CHUNK_PREFIX = "chunk"
 
@@ -211,7 +212,7 @@ def load_story_so_far_for_resume(output_dir: Path, start_section: int) -> str:
 
 def main() -> int:
     # Must be declared before any argparse default values referencing these names.
-    global BOOK_TITLE, SECTION_LABEL, CHUNK_PREFIX, SOURCE_DIR, OUTPUT_DIR, START_SECTION, END_SECTION, STORY_SO_FAR_FILE
+    global BOOK_TITLE, CHUNK_PREFIX, SOURCE_DIR, OUTPUT_DIR, START_SECTION, END_SECTION, STORY_SO_FAR_FILE
     parser = argparse.ArgumentParser(
         description="Translate book chunks with rolling story context."
     )
@@ -229,11 +230,6 @@ def main() -> int:
         "--book-title",
         default=BOOK_TITLE,
         help="Book title to include in the prompt.",
-    )
-    parser.add_argument(
-        "--section-label",
-        default=SECTION_LABEL,
-        help="Label for each chunk/section in the prompt (e.g. Chunk, Scene, Act Scene).",
     )
     parser.add_argument(
         "--chunk-prefix",
@@ -266,7 +262,6 @@ def main() -> int:
 
     # Override module-level defaults from CLI.
     BOOK_TITLE = args.book_title
-    SECTION_LABEL = args.section_label
     CHUNK_PREFIX = args.chunk_prefix
     SOURCE_DIR = Path(args.source_dir)
     OUTPUT_DIR = Path(args.output_dir)

@@ -15,7 +15,6 @@ Example:
 Then in book_translate.py set:
   SOURCE_DIR = Path("book_source/chunks")
   CHUNK_PREFIX = "chunk"
-  SECTION_LABEL = "Chunk"   # or "Scene" if you pre-split by scene
   START_SECTION / END_SECTION to match how many chunk_*.txt files you got.
 """
 
