@@ -36,7 +36,7 @@ This quickstart example chunks the classical Chinese tale *Old Dragonbeard*（�
 chunk-book book_source/old_dragonbeard_original_chinese.txt --out-dir book_source/old_dragonbeard_chunks --prefix chunk --max-words 280 --manifest
 ```
 
-Chunks: [`book_source/old_dragonbeard_chunks/`](book_source/old_dragonbeard_chunks/)
+Output chunks will be written to the directory [`book_source/old_dragonbeard_chunks/`](book_source/old_dragonbeard_chunks/)
 
 ### 2) Translate the chunks
 
@@ -48,8 +48,6 @@ translate-chunks \
   --start-section 1 \
   --target-language English
 ```
-
-(Default `--voice` is clear, neutral prose; add `--voice "..."` only if you want a different tone.)
 
 The translated output will be written to `--output-dir` as:
 - `chunk_XX.md`: the translated, condensed recap for chunk `XX`
@@ -69,21 +67,20 @@ For convenience, an excerpt of the translated result is shown below. The full tr
 **Last chunk (8 of 8)** 
 > Following the Emperor’s confirmed identity and Li Jing’s return to Chang’an, discussions centered on the origins of Zhang’s strategic thinking. It was suggested that Zhang’s military methods owed a significant debt to the teachings of Wei Gong. This observation highlighted a key element of Zhang’s approach – a pragmatic, adaptable strategy rooted in established military principles, rather than a purely ambitious or heroic one. The encounter underscored the calculated nature of Zhang’s actions, revealing a response to political instability rather than a pursuit of conquest.
 
-Notes:
+Other options:
 - `--target-language` lets you translate output into a language different from the source.
 - `--voice` is a tone/style label used in the prompt. The default is "clear, neutral prose." Other options include "easier reading level", "slang", or "Gen Z." 
 - The translator maintains continuity via `story_so_far.md` in the output folder.
 
 ## Example: *The Monkey's Paw* (English → Gen Z tone)
 
-The short story **“The Monkey’s Paw”** (W. W. Jacobs) is included as `book_source/the_monkeys_paw.txt` (public domain text from [Project Gutenberg #12122](https://www.gutenberg.org/ebooks/12122)). Here the **source and target language are both English**; the model **rewrites** each chunk in a Gen Z–style voice instead of translating from another language.
+The short story **“The Monkey’s Paw”** (W. W. Jacobs) is included as `book_source/the_monkeys_paw.txt` (public domain text from [Project Gutenberg #12122](https://www.gutenberg.org/ebooks/12122)). Here the source and target language are both English; the model rewrites each chunk in a Gen Z–style voice instead of translating from another language.
 
 ### 1) Chunk the story
 
 ```bash
 chunk-book book_source/the_monkeys_paw.txt --out-dir book_source/the_monkeys_paw_chunks --prefix chunk --max-words 400 --manifest
 ```
-
 Output chunks will be written to the directory [`book_source/the_monkeys_paw_chunks/`](book_source/the_monkeys_paw_chunks/).
 
 ### 2) Run `translate-chunks` with a Gen Z voice
@@ -95,14 +92,12 @@ translate-chunks \
   --source-dir book_source/the_monkeys_paw_chunks \
   --output-dir book_output/the_monkeys_paw_genz \
   --start-section 1 \
-  --end-section 11 \
   --target-language English \
   --voice "Gen Z: casual, internet-native, witty but still clear; not cringe, not a lecture"
 ```
-
 You can find outputs in [`book_output/the_monkeys_paw_genz/`](book_output/the_monkeys_paw_genz/).
 
-### 3) Sample output (committed Gen Z run)
+### 3) Sample output
 For convenience, an excerpt of the translated result is shown below. The full translation can be found in this repo at ([`book_output/the_monkeys_paw_genz`](book_output/the_monkeys_paw_genz)).
 
 **Chunk 1**:
@@ -120,6 +115,19 @@ If only some chunks of the translation are completed and you want to complete it
 - Optionally, omit `--end-section` to auto-detect the last chunk number from `--source-dir`.
 - Leave the same `--output-dir` (so `story_so_far.md` is loaded automatically)
 
+An example command for the Monkey's Paw to translate only chunks 8-11 would be:
+```bash
+translate-chunks \
+  --book-title "The Monkey's Paw" \
+  --chunk-prefix chunk \
+  --source-dir book_source/the_monkeys_paw_chunks \
+  --output-dir book_output/the_monkeys_paw_genz \
+  --start-section 8 \
+  --end-section 11 \
+  --target-language English \
+  --voice "Gen Z: casual, internet-native, witty but still clear; not cringe, not a lecture"
+```
+
 ## CLI reference
 
 ### `chunk-book` (from `chunk_book.py`)
@@ -130,11 +138,11 @@ chunk-book INPUT_FILE --out-dir OUT_DIR --prefix PREFIX --max-words 400 --manife
 
 | Option | Required? | Type | Default | Meaning |
 |--------|-------------|------|---------|---------|
-| `INPUT_FILE` (positional) | **Required** | path | — | Source `.txt` or `.md` file to split |
+| `INPUT_FILE` | **Required** | path | No default, required field. | Source `.txt` or `.md` file to split |
 | `--out-dir` | Optional | path | `book_source/chunks` | Directory for `PREFIX_01.txt`, `PREFIX_02.txt`, … |
 | `--prefix` | Optional | string | `chunk` | Filename prefix |
 | `--max-words` | Optional | int | `400` | Target max size per chunk; CJK counts one character per unit |
-| `--manifest` | Optional | flag (bool) | off | If set, also write `manifest.json` in `--out-dir`: a JSON array of `{ "index", "file", "words" }` per chunk (1-based chunk number, path to the chunk file, word count) |
+| `--manifest` | Optional | bool | false | If set, also write `manifest.json` in `--out-dir`: a JSON array of `{ "index", "file", "words" }` per chunk (1-based chunk number, path to the chunk file, word count) |
 
 ### `translate-chunks` (from `book_translate.py`)
 
@@ -158,17 +166,15 @@ translate-chunks \
 | `--output-dir` | Optional | path | `book_output/old_dragonbeard_english` | Where to write `chunk_XX.md`, `story_so_far.md`, etc. |
 | `--start-section` | Optional | int | `1` | First chunk index to translate (use for resume) |
 | `--end-section` | Optional | int | null | Last chunk index; when omitted, the script will infer the highest chunk number from files in `--source-dir` |
-| `--target-language` | Optional | string | `English` | Language for model output |
-| `--voice` | Optional | string | clear, neutral prose | Style/tone label for the recap |
+| `--target-language` | Optional | string | `English` | Language for model output. This will be injected into the LLM prompt, so the flag takes freeform text |
+| `--voice` | Optional | string | `clear, neutral prose` | Style/tone label for the recap. This will be injected into the LLM prompt, so the flag takes freeform text |
 
 All `translate-chunks` flags are optional; omitting path flags uses the defaults above. Model name and generation temperature are not CLI flags.
 
-When `--end-section` is omitted, the last chunk index is inferred from `{chunk-prefix}_NN` files in `--source-dir`.
-
 Output files in `OUTPUT_DIR`:
 - `chunk_XX.md`: the translated, condensed recap for that chunk
-- `chunk_XX.context.md`: the updated rolling “story so far” after the chunk (debug/backup)
-- `story_so_far.md`: the latest “story so far” (for resume)
+- `chunk_XX.context.md`: the updated rolling “story so far” after the chunk (for debugging)
+- `story_so_far.md`: the latest “story so far”, used to give the LLM story context
 - `index.json`: metadata listing generated chunk files
 
 
