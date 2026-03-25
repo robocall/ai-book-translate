@@ -2,6 +2,8 @@
 
 Tools for translating a long book/text into a different language or a different tone (e.g., Gen Z) using a local [Ollama](https://ollama.com/) model.
 
+Feeding a long book into an LLM one paragraph at a time—with no memory of what came before—usually gives weak results. The model loses track of characters and plot, introducing inconsistencies. This repo helps by chunking the text to fit the context window and carrying a rolling summary forward so each translated chunk is aware of the story so far.
+
 This repo consists of two small scripts packaged as a CLI:
 - `chunk_book.py`: split one big text file into paragraph-aware chunks to fit into an LLM's limited context window
 - `book_translate.py`: translate each chunk while maintaining a rolling “story so far” context for narrative consistency.
@@ -12,7 +14,7 @@ Sample results are committed under `book_output/old_dragonbeard_english/` and `b
 
 - Python `>= 3.10`
 - Ollama running locally (we assume the Ollama API URL: `http://localhost:11434`)
-- A model pulled in Ollama (default in `book_translate.py`: `gemma3:4b`)
+- A model pulled in Ollama (default: `gemma3:4b`)
 
 ## Install
 
@@ -40,7 +42,7 @@ Chunks: [`book_source/old_dragonbeard_chunks/`](book_source/old_dragonbeard_chun
 
 ```bash
 translate-chunks \
-  --book-title "Old Dragonbeard (虬髯客傳)" \
+  --book-title "Old Dragonbeard" \
   --source-dir book_source/old_dragonbeard_chunks \
   --output-dir book_output/old_dragonbeard_english \
   --start-section 1 \
@@ -126,13 +128,13 @@ If only some chunks of the translation are completed and you want to complete it
 chunk-book INPUT_FILE --out-dir OUT_DIR --prefix PREFIX --max-words 400 --manifest
 ```
 
-| Option | Type | Meaning |
-|--------|------|---------|
-| `INPUT_FILE` (positional) | path | Source `.txt` or `.md` file to split |
-| `--out-dir` | path | Directory for `PREFIX_01.txt`, `PREFIX_02.txt`, … |
-| `--prefix` | string | Filename prefix (default: `chunk`) |
-| `--max-words` | int | Target max size per chunk; CJK counts one character per unit (default: `400`) |
-| `--manifest` | flag (bool) | If set, also write `manifest.json` in `--out-dir` |
+| Option | Required? | Type | Default | Meaning |
+|--------|-------------|------|---------|---------|
+| `INPUT_FILE` (positional) | **Required** | path | — | Source `.txt` or `.md` file to split |
+| `--out-dir` | Optional | path | `book_source/chunks` | Directory for `PREFIX_01.txt`, `PREFIX_02.txt`, … |
+| `--prefix` | Optional | string | `chunk` | Filename prefix |
+| `--max-words` | Optional | int | `400` | Target max size per chunk; CJK counts one character per unit |
+| `--manifest` | Optional | flag (bool) | off | If set, also write `manifest.json` in `--out-dir`: a JSON array of `{ "index", "file", "words" }` per chunk (1-based chunk number, path to the chunk file, word count) |
 
 ### `translate-chunks` (from `book_translate.py`)
 
@@ -148,18 +150,20 @@ translate-chunks \
   --voice "clear, neutral prose"
 ```
 
-| Option | Type | Meaning |
-|--------|------|---------|
-| `--book-title` | string | Title passed into the prompt |
-| `--chunk-prefix` | string | Must match source filenames (`{prefix}_01.txt`, …; default: `chunk`) |
-| `--source-dir` | path (string) | Folder containing chunk files |
-| `--output-dir` | path (string) | Where to write `chunk_XX.md`, `story_so_far.md`, etc. |
-| `--start-section` | int | First chunk index to translate (default: `1`; use for resume) |
-| `--end-section` | int or omitted | Last chunk index; **omit** to infer the highest chunk number from files in `--source-dir` |
-| `--target-language` | string | Language for model output (default: `English`) |
-| `--voice` | string | Style/tone label for the recap (default: clear, neutral prose) |
+| Option | Required? | Type | Default | Meaning |
+|--------|-------------|------|---------|---------|
+| `--book-title` | Optional | string | `Old Dragonbeard (虬髯客傳)` | Title passed into the prompt; helps the model with context |
+| `--chunk-prefix` | Optional | string | `chunk` | Must match source filenames (`{prefix}_01.txt`, …) |
+| `--source-dir` | Optional | path | `book_source/old_dragonbeard_chunks` | Folder containing chunk files |
+| `--output-dir` | Optional | path | `book_output/old_dragonbeard_english` | Where to write `chunk_XX.md`, `story_so_far.md`, etc. |
+| `--start-section` | Optional | int | `1` | First chunk index to translate (use for resume) |
+| `--end-section` | Optional | int | null | Last chunk index; when omitted, the script will infer the highest chunk number from files in `--source-dir` |
+| `--target-language` | Optional | string | `English` | Language for model output |
+| `--voice` | Optional | string | clear, neutral prose | Style/tone label for the recap |
 
-Model and generation settings (`MODEL`, temperature, etc.) are configured in `book_translate.py`, not the CLI.
+All `translate-chunks` flags are optional; omitting path flags uses the defaults above. Model name and generation temperature are not CLI flags.
+
+When `--end-section` is omitted, the last chunk index is inferred from `{chunk-prefix}_NN` files in `--source-dir`.
 
 Output files in `OUTPUT_DIR`:
 - `chunk_XX.md`: the translated, condensed recap for that chunk
@@ -170,17 +174,17 @@ Output files in `OUTPUT_DIR`:
 
 ## Troubleshooting
 
-| What you see | What usually fixes it |
+| Error | Solutions |
 |--------------|------------------------|
 | `error: externally-managed-environment` when running `pip install` | Create a virtual environment and install there: `python3 -m venv .venv`, then `source .venv/bin/activate` (macOS/Linux) or `.venv\Scripts\activate` (Windows), then `pip install -e .`. Run `chunk-book` / `translate-chunks` with that same environment’s Python. |
 | `ModuleNotFoundError: No module named 'ollama'` | The interpreter you use to run the script does not have dependencies installed. Use the venv above, or `python3 -m pip install ollama` into the environment you actually use. |
 | `Connection refused` / `Failed to connect` to Ollama | Start the Ollama app or run `ollama serve`. Ensure nothing else is blocking `http://127.0.0.1:11434`. |
-| Model error such as `model ... not found` | Pull the default model: `ollama pull gemma3:4b`, or edit `MODEL` in `book_translate.py` to a tag you already have (`ollama list`). |
+| Model error such as `model ... not found` | Pull the default model: `ollama pull gemma3:4b`, or change the default model tag in the translator module to one you already have (`ollama list`). |
 | `No non-empty paragraphs in input` (`chunk-book`) | The file is empty or has no paragraph breaks. Add content, or separate paragraphs with a blank line. |
 | `Input not found` (`chunk-book`) | Fix the path to your source file (run from the repo root or use an absolute path). |
 | `Could not infer end-section: no chunk files found` (`translate-chunks`) | Point `--source-dir` at the folder that contains `chunk_01.txt` (or `.md`), and make sure `--chunk-prefix` matches the filenames (e.g. `chunk` for `chunk_01.txt`). |
 | `Missing source for chunk N` / `FileNotFoundError` for a chunk | `--end-section` is larger than the number of chunks, or files are missing / misnumbered. Re-run `chunk-book` or set `--end-section` to the last existing chunk index. |
-| `Warning: no <<<CONTEXT>>> block for section N` | The model did not follow the required output format; the script fills in a fallback. Retry the run, switch to a stronger model, or lower temperature in `book_translate.py` if needed. |
+| `Warning: no <<<CONTEXT>>> block for section N` | The model did not follow the required output format; the script fills in a fallback. Retry the run, switch to a stronger model, or lower the generation temperature in the translator module if needed. |
 | Output reads like a loose summary, wrong names, or drift across chunks | Note that the pipeline is tuned for **compressed recap**, not literal translation. Consider modifying the prompt, or increasing the number of words per chunk. Please also open an issue with your example in this github repo.|
 
 ## License
