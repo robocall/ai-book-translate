@@ -1,10 +1,12 @@
-# genz-ollama
+# Long-text translation with Ollama
 
-Tools for translating a long book/text into a different language or a different tone (e.g., Gen Z) using a **local Ollama model**.
+Tools for translating a long book/text into a different language or a different tone (e.g., Gen Z) using a local [Ollama](https://ollama.com/) model.
 
-This repo is organized as two small scripts:
+This repo consists of two small scripts packaged as a CLI:
 - `chunk_book.py`: split one big text file into paragraph-aware chunks to fit into an LLM's limited context window
-- `book_translate.py`: translate chunks one-by-one while maintaining a rolling “story so far” context for narrative consistency.
+- `book_translate.py`: translate each chunk while maintaining a rolling “story so far” context for narrative consistency.
+
+Sample runs (same settings as the quickstart examples below) are committed under `book_output/old_dragonbeard_english/` and `book_output/the_monkeys_paw_genz/` so you can read outputs without running Ollama.
 
 ## Prerequisites
 
@@ -23,7 +25,7 @@ pip install -e .
 This uses the CLI entry points defined in `pyproject.toml`.
 
 ## Quickstart
-This quickstart chunks the classical Chinese tale *Old Dragonbeard*（《虬髯客傳》）and then translates the resulting chunks into English. The source text is included under `book_source/`.
+This quickstart example chunks the classical Chinese tale *Old Dragonbeard*（《虬髯客傳）and then translates the resulting chunks into English. The source text is included under `book_source/`.
 
 ### 1) Chunk a big text file
 

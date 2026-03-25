@@ -1,0 +1,79 @@
+[
+  {
+    "section": 1,
+    "model": "gemma3:4b",
+    "output_file": "book_output/the_monkeys_paw_genz/chunk_01.md",
+    "context_file": "book_output/the_monkeys_paw_genz/chunk_01.context.md",
+    "story_so_far_file": "book_output/the_monkeys_paw_genz/story_so_far.md"
+  },
+  {
+    "section": 2,
+    "model": "gemma3:4b",
+    "output_file": "book_output/the_monkeys_paw_genz/chunk_02.md",
+    "context_file": "book_output/the_monkeys_paw_genz/chunk_02.context.md",
+    "story_so_far_file": "book_output/the_monkeys_paw_genz/story_so_far.md"
+  },
+  {
+    "section": 3,
+    "model": "gemma3:4b",
+    "output_file": "book_output/the_monkeys_paw_genz/chunk_03.md",
+    "context_file": "book_output/the_monkeys_paw_genz/chunk_03.context.md",
+    "story_so_far_file": "book_output/the_monkeys_paw_genz/story_so_far.md"
+  },
+  {
+    "section": 4,
+    "model": "gemma3:4b",
+    "output_file": "book_output/the_monkeys_paw_genz/chunk_04.md",
+    "context_file": "book_output/the_monkeys_paw_genz/chunk_04.context.md",
+    "story_so_far_file": "book_output/the_monkeys_paw_genz/story_so_far.md"
+  },
+  {
+    "section": 5,
+    "model": "gemma3:4b",
+    "output_file": "book_output/the_monkeys_paw_genz/chunk_05.md",
+    "context_file": "book_output/the_monkeys_paw_genz/chunk_05.context.md",
+    "story_so_far_file": "book_output/the_monkeys_paw_genz/story_so_far.md"
+  },
+  {
+    "section": 6,
+    "model": "gemma3:4b",
+    "output_file": "book_output/the_monkeys_paw_genz/chunk_06.md",
+    "context_file": "book_output/the_monkeys_paw_genz/chunk_06.context.md",
+    "story_so_far_file": "book_output/the_monkeys_paw_genz/story_so_far.md"
+  },
+  {
+    "section": 7,
+    "model": "gemma3:4b",
+    "output_file": "book_output/the_monkeys_paw_genz/chunk_07.md",
+    "context_file": "book_output/the_monkeys_paw_genz/chunk_07.context.md",
+    "story_so_far_file": "book_output/the_monkeys_paw_genz/story_so_far.md"
+  },
+  {
+    "section": 8,
+    "model": "gemma3:4b",
+    "output_file": "book_output/the_monkeys_paw_genz/chunk_08.md",
+    "context_file": "book_output/the_monkeys_paw_genz/chunk_08.context.md",
+    "story_so_far_file": "book_output/the_monkeys_paw_genz/story_so_far.md"
+  },
+  {
+    "section": 9,
+    "model": "gemma3:4b",
+    "output_file": "book_output/the_monkeys_paw_genz/chunk_09.md",
+    "context_file": "book_output/the_monkeys_paw_genz/chunk_09.context.md",
+    "story_so_far_file": "book_output/the_monkeys_paw_genz/story_so_far.md"
+  },
+  {
+    "section": 10,
+    "model": "gemma3:4b",
+    "output_file": "book_output/the_monkeys_paw_genz/chunk_10.md",
+    "context_file": "book_output/the_monkeys_paw_genz/chunk_10.context.md",
+    "story_so_far_file": "book_output/the_monkeys_paw_genz/story_so_far.md"
+  },
+  {
+    "section": 11,
+    "model": "gemma3:4b",
+    "output_file": "book_output/the_monkeys_paw_genz/chunk_11.md",
+    "context_file": "book_output/the_monkeys_paw_genz/chunk_11.context.md",
+    "story_so_far_file": "book_output/the_monkeys_paw_genz/story_so_far.md"
+  }
+]

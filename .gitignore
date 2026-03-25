@@ -5,8 +5,12 @@ __pycache__/
 *.egg-info/
 .DS_Store
 
-# Model outputs (reproducible with translate-chunks)
-book_output/
+# Model outputs: ignore by default, but ship README example runs (optional to regenerate)
+book_output/*
+!book_output/old_dragonbeard_english/
+!book_output/old_dragonbeard_english/**
+!book_output/the_monkeys_paw_genz/
+!book_output/the_monkeys_paw_genz/**
 
 # book_source: only quickstart examples (see README)
 book_source/*
