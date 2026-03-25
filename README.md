@@ -14,7 +14,7 @@ Sample results are committed under `book_output/old_dragonbeard_english/` and `b
 
 - [Prerequisites](#prerequisites)
 - [Install](#install)
-- [Quickstart](#quickstart)
+- [Quickstart: *Old Dragonbeard* (Chinese → English)](#quickstart-old-dragonbeard-chinese--english)
   - [1) Chunk a long text file](#1-chunk-a-long-text-file)
   - [2) Translate the chunks](#2-translate-the-chunks)
   - [3) Sample output](#3-sample-output)
@@ -45,9 +45,9 @@ pip install -e .
 
 This uses the CLI entry points defined in `pyproject.toml`.
 
-## Quickstart
+## Quickstart: *Old Dragonbeard* (Chinese → English)
 
-This quickstart example chunks the classical Chinese tale *Old Dragonbeard*（虬髯客傳）and then translates the resulting chunks into English. The source text is included under `book_source/`.
+This walkthrough chunks the classical Chinese tale *Old Dragonbeard*（虬髯客傳）and translates the resulting chunks into English. The source text is included under `book_source/`.
 
 ### 1) Chunk a long text file
 
