@@ -6,7 +6,7 @@ This repo consists of two small scripts packaged as a CLI:
 - `chunk_book.py`: split one big text file into paragraph-aware chunks to fit into an LLM's limited context window
 - `book_translate.py`: translate each chunk while maintaining a rolling “story so far” context for narrative consistency.
 
-Sample runs (same settings as the quickstart examples below) are committed under `book_output/old_dragonbeard_english/` and `book_output/the_monkeys_paw_genz/` so you can read outputs without running Ollama.
+Sample results are committed under `book_output/old_dragonbeard_english/` and `book_output/the_monkeys_paw_genz/`.
 
 ## Prerequisites
 
@@ -25,6 +25,7 @@ pip install -e .
 This uses the CLI entry points defined in `pyproject.toml`.
 
 ## Quickstart
+
 This quickstart example chunks the classical Chinese tale *Old Dragonbeard*（虬髯客傳）and then translates the resulting chunks into English. The source text is included under `book_source/`.
 
 ### 1) Chunk a long text file
@@ -56,20 +57,19 @@ The translated output will be written to `--output-dir` as:
 
 ### 3) Sample output
 
-For convenience, the first and last parts of the translation are shown below:
-**Chunk 1** ([`book_output/old_dragonbeard_english/chunk_01.md`](book_output/old_dragonbeard_english/chunk_01.md)):
+For convenience, an excerpt of the translated result is shown below. The full translation can be found in this repo at ([`book_output/old_dragonbeard_english`](book_output/old_dragonbeard_english)).
 
+**Chunk 1**
 > Emperor Yang of the Sui, seeking stability, appointed Sima Yang as governor of Chang’an, a position that reflected the emperor’s increasing reliance on Sima’s influence amidst widespread political turmoil. Sima’s behavior was marked by arrogance and extravagance, deviating from traditional protocols for court officials. He habitually sat on his bed when receiving audiences, displaying lavish gifts and employing numerous servants, a practice considered inappropriate for a high-ranking official. This trend intensified as the reign neared its end.
 >
 > During this period, Li Jing, a county magistrate dressed as a commoner, presented the emperor with a strategic proposal...
 
-**Last chunk (8 of 8)** ([`book_output/old_dragonbeard_english/chunk_08.md`](book_output/old_dragonbeard_english/chunk_08.md))
-
+**Last chunk (8 of 8)** 
 > Following the Emperor’s confirmed identity and Li Jing’s return to Chang’an, discussions centered on the origins of Zhang’s strategic thinking. It was suggested that Zhang’s military methods owed a significant debt to the teachings of Wei Gong. This observation highlighted a key element of Zhang’s approach – a pragmatic, adaptable strategy rooted in established military principles, rather than a purely ambitious or heroic one. The encounter underscored the calculated nature of Zhang’s actions, revealing a response to political instability rather than a pursuit of conquest.
 
 Notes:
 - `--target-language` lets you translate output into a language different from the source.
-- `--voice` is a tone/style label used in the prompt. The default is **clear, neutral prose** (not slang or Gen Z unless you set it).
+- `--voice` is a tone/style label used in the prompt. The default is "clear, neutral prose." Other options include "easier reading level", "slang", or "Gen Z." 
 - The translator maintains continuity via `story_so_far.md` in the output folder.
 
 ## Example: *The Monkey's Paw* (English → Gen Z tone)
@@ -101,15 +101,15 @@ translate-chunks \
 You can find outputs in [`book_output/the_monkeys_paw_genz/`](book_output/the_monkeys_paw_genz/).
 
 ### 3) Sample output (committed Gen Z run)
+For convenience, an excerpt of the translated result is shown below. The full translation can be found in this repo at ([`book_output/the_monkeys_paw_genz`](book_output/the_monkeys_paw_genz)).
 
-**Chunk 1** ([`book_output/the_monkeys_paw_genz/chunk_01.md`](book_output/the_monkeys_paw_genz/chunk_01.md)):
+**Chunk 1**:
 
 > Okay, so the Whites are chilling in their ridiculously isolated villa, playing chess with a seriously intense dad and a slightly cooler son. The grandma’s knitting, the wind’s howling, and Mr. White is already stressing about how awful their location is – basically, it’s a swampy nightmare. 
 
-**Last chunk (11 of 11)** ([`book_output/the_monkeys_paw_genz/chunk_11.md`](book_output/the_monkeys_paw_genz/chunk_11.md)) — same run, so later recaps build on the rolling “story so far” from earlier chunks:
+**Last chunk (11 of 11)**:
 
 > Okay, so things are *seriously* spiraling. Mr. White’s on the floor, basically having a full-blown panic, desperately searching for the monkey’s paw before whatever creepy dude outside gets in. The knocking is insane – like, a constant barrage – and his wife’s just casually dropping a chair against the door. You can hear the bolt slowly backing out, and then *boom*, he finds the paw and throws out his last wish. The knocking just…stops. The wind rushes in, his wife lets out this massive wail of disappointment, and he sprints to her side, then bolts for the gate. The streetlamp’s flickering, and the road’s deserted. It’s pure chaos.
-
 
 ## Example: Resume a partial translation
 
