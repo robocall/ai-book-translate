@@ -1,6 +1,6 @@
 # Long-text translation with Ollama
 
-Tools for translating a long book/text into a different language or a different tone (e.g., Gen Z) using a local [Ollama](https://ollama.com/) model.
+This CLI translates a long book/text into a different language or a different tone (e.g., Gen Z) using a local [Ollama](https://ollama.com/) model.
 
 Feeding a long book into an LLM one paragraph at a time—with no memory of what came before—usually gives weak results. The model loses track of characters and plot, introducing inconsistencies. This repo helps by chunking the text to fit the context window and carrying a rolling summary forward so each translated chunk is aware of the story so far.
 
@@ -9,6 +9,25 @@ This repo consists of two small scripts packaged as a CLI:
 - `book_translate.py`: translate each chunk while maintaining a rolling “story so far” context for narrative consistency.
 
 Sample results are committed under `book_output/old_dragonbeard_english/` and `book_output/the_monkeys_paw_genz/`.
+
+## Contents
+
+- [Prerequisites](#prerequisites)
+- [Install](#install)
+- [Quickstart](#quickstart)
+  - [1) Chunk a long text file](#1-chunk-a-long-text-file)
+  - [2) Translate the chunks](#2-translate-the-chunks)
+  - [3) Sample output](#3-sample-output)
+- [Example: *The Monkey's Paw* (English → Gen Z tone)](#example-the-monkeys-paw-english--gen-z-tone)
+  - [1) Chunk the story](#1-chunk-the-story)
+  - [2) Run `translate-chunks` with a Gen Z voice](#2-run-translate-chunks-with-a-gen-z-voice)
+  - [3) Sample output](#3-sample-output-1)
+- [Example: Resume a partial translation](#example-resume-a-partial-translation)
+- [CLI reference](#cli-reference)
+  - [`chunk-book` (from `chunk_book.py`)](#chunk-book-from-chunk_bookpy)
+  - [`translate-chunks` (from `book_translate.py`)](#translate-chunks-from-book_translatepy)
+- [Troubleshooting](#troubleshooting)
+- [License](#license)
 
 ## Prerequisites
 
