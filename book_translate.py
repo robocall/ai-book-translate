@@ -29,16 +29,16 @@ from typing import Any
 import ollama
 
 # --- per-book knobs ---
-BOOK_TITLE = "The Metamorphosis"
+BOOK_TITLE = "Old Dragonbeard (虬髯客傳)"
 SECTION_LABEL = "Chunk"
 CHUNK_PREFIX = "chunk"
 
 MODEL = "gemma3:4b"
 START_SECTION = 1
-END_SECTION = 69  # inclusive; for resume set START_SECTION to next chunk (load story_so_far.md)
+END_SECTION = 8  # inclusive; for resume set START_SECTION to next chunk (load story_so_far.md)
 
-SOURCE_DIR = Path("book_source/metamorphosis_chunks")
-OUTPUT_DIR = Path("book_output/metamorphosis_genz")
+SOURCE_DIR = Path("book_source/old_dragonbeard_chunks")
+OUTPUT_DIR = Path("book_output/old_dragonbeard_english")
 
 # Canonical rolling summary for the *next* chunk (and for resuming another day).
 STORY_SO_FAR_FILE = OUTPUT_DIR / "story_so_far.md"
