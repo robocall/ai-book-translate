@@ -1,0 +1,24 @@
+# Local environment
+.venv/
+__pycache__/
+*.py[cod]
+*.egg-info/
+.DS_Store
+
+# Model outputs (reproducible with translate-chunks)
+book_output/
+
+# book_source: only quickstart examples (see README)
+book_source/*
+!book_source/old_dragonbeard_original_chinese.txt
+!book_source/old_dragonbeard_chunks/
+!book_source/old_dragonbeard_chunks/**
+!book_source/the_monkeys_paw.txt
+!book_source/the_monkeys_paw_chunks/
+!book_source/the_monkeys_paw_chunks/**
+
+# Other experiments / fetch helpers (not in README quickstart)
+fetch_*.py
+inferno_translate.py
+inferno_genz_output/
+inferno_source/

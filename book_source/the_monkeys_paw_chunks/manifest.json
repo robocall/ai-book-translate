@@ -1,0 +1,57 @@
+[
+  {
+    "index": 1,
+    "file": "book_source/the_monkeys_paw_chunks/chunk_01.txt",
+    "words": 352
+  },
+  {
+    "index": 2,
+    "file": "book_source/the_monkeys_paw_chunks/chunk_02.txt",
+    "words": 381
+  },
+  {
+    "index": 3,
+    "file": "book_source/the_monkeys_paw_chunks/chunk_03.txt",
+    "words": 397
+  },
+  {
+    "index": 4,
+    "file": "book_source/the_monkeys_paw_chunks/chunk_04.txt",
+    "words": 396
+  },
+  {
+    "index": 5,
+    "file": "book_source/the_monkeys_paw_chunks/chunk_05.txt",
+    "words": 369
+  },
+  {
+    "index": 6,
+    "file": "book_source/the_monkeys_paw_chunks/chunk_06.txt",
+    "words": 385
+  },
+  {
+    "index": 7,
+    "file": "book_source/the_monkeys_paw_chunks/chunk_07.txt",
+    "words": 383
+  },
+  {
+    "index": 8,
+    "file": "book_source/the_monkeys_paw_chunks/chunk_08.txt",
+    "words": 397
+  },
+  {
+    "index": 9,
+    "file": "book_source/the_monkeys_paw_chunks/chunk_09.txt",
+    "words": 381
+  },
+  {
+    "index": 10,
+    "file": "book_source/the_monkeys_paw_chunks/chunk_10.txt",
+    "words": 337
+  },
+  {
+    "index": 11,
+    "file": "book_source/the_monkeys_paw_chunks/chunk_11.txt",
+    "words": 160
+  }
+]

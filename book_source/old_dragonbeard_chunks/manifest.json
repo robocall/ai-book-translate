@@ -1,0 +1,42 @@
+[
+  {
+    "index": 1,
+    "file": "book_source/old_dragonbeard_chunks/chunk_01.txt",
+    "words": 277
+  },
+  {
+    "index": 2,
+    "file": "book_source/old_dragonbeard_chunks/chunk_02.txt",
+    "words": 271
+  },
+  {
+    "index": 3,
+    "file": "book_source/old_dragonbeard_chunks/chunk_03.txt",
+    "words": 274
+  },
+  {
+    "index": 4,
+    "file": "book_source/old_dragonbeard_chunks/chunk_04.txt",
+    "words": 244
+  },
+  {
+    "index": 5,
+    "file": "book_source/old_dragonbeard_chunks/chunk_05.txt",
+    "words": 258
+  },
+  {
+    "index": 6,
+    "file": "book_source/old_dragonbeard_chunks/chunk_06.txt",
+    "words": 276
+  },
+  {
+    "index": 7,
+    "file": "book_source/old_dragonbeard_chunks/chunk_07.txt",
+    "words": 280
+  },
+  {
+    "index": 8,
+    "file": "book_source/old_dragonbeard_chunks/chunk_08.txt",
+    "words": 14
+  }
+]

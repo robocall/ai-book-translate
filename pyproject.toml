@@ -1,0 +1,22 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "genz-ollama"
+version = "0.1.0"
+description = "Chunk and translate literature into user-specified language with a user-specified voice using a local Ollama model."
+requires-python = ">=3.10"
+license = { text = "MIT" }
+dependencies = ["ollama"]
+
+[project.scripts]
+chunk-book = "chunk_book:main"
+translate-chunks = "book_translate:main"
+
+[tool.setuptools]
+py-modules = [
+  "book_translate",
+  "chunk_book",
+]
+
