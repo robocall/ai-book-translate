@@ -1,4 +1,4 @@
-# Long-text translation with Ollama
+# Context-preserving translation for long texts with LLMs
 
 This CLI translates a long book/text into a different language or a different tone (e.g., Gen Z) using a local [Ollama](https://ollama.com/) model.
 
